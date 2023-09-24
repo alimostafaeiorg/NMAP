@@ -1,0 +1,23 @@
+Finding online hosts :
+This recipe describes how to determine whether a host is online with Nmap ------>    
+#nmap -sn <target>
+
+------
+
+
+If you have a seeder and want to find the ips that are above: 
+#nmap -sn CIDR
+
+
+------
+
+Tracing routes
+Ping scans allow including traceroute information of the targets. Use the Nmap --traceroute option to trace the route from the scanning machine to the target host:
+
+#sudo nmap -sn --traceroute google.com microsoft.com
+
+
+-------
+
+An interesting NSE script to try when discovering online hosts in networks is the broadcast-ping script, which uses a broadcast ping request to attempt to discover online hosts:
+#nmap -sn --script broadcast-ping 192.168.0.1/24
