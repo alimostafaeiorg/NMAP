@@ -1,0 +1,59 @@
+Listing open ports on a target
+This recipe describes how to use Nmap to determine the port states of a target, a process used to identify running services commonly referred to as port scanning. 
+
+------------
+
+default scan :
+nmap target.org
+
+A target can be an IP address, a hostname, or a network range
+
+
+
+
+How it works...
+The default Nmap scan returns a list of ports. In addition, it returns a service name from a database distributed with Nmap and the port state for each of the listed ports.
+Nmap categorizes ports into the following states:
+• Open: Open indicates that a service is listening for connections on this port.
+• Closed: Closed indicates that the probes were received, but it was concluded that there was no service running on this port.
+• Filtered: Filtered indicates that there were no signs that the probes were received and the state could not be established. This could indicate that the probes are being dropped by some kind of filtering.
+• Unfiltered: Unfiltered indicates that the probes were received but a state could not be established.
+• Open/Filtered: This indicates that the port was filtered or open but the state could not be established.
+• Closed/Filtered: This indicates that the port was filtered or closed but the state could not be established.
+
+
+------------
+
+Afterward, it performs the host discovery process to check whether the target is online
+(see the Finding online hosts recipe). To skip this step, use the no ping option, -Pn:
+#nmap -Pn scanme.nmap.org
+
+-----------------------
+
+
+Nmap then converts the IPv4 or IPv6 address back to a hostname using a reverse DNS query. Use -n to skip this step as well if you do not need that information:
+
+#nmap -n scanme.nmap.org
+
+
+-----------------------
+
+Scanning specific port ranges : 
+
+There are several ways of using the Nmap -p option:
+
+• Port list separated by commas: $ nmap -p 80,443 localhost
+• Port range denoted with hyphens: $ nmap -p 1-100 localhost  
+• Alias for all ports from 1 to 65535: # nmap -p- localhost
+• Specific ports by protocol: # nmap -pT:25,U:53 <target>
+• Service name: # nmap -p smtp <target>
+• Only ports registered in the Nmap services database: # nmap -p[1-65535] <target>
+
+
+
+
+
+
+
+
+
