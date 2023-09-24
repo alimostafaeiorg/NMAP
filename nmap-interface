@@ -1,0 +1,13 @@
+Selecting a network interface
+Nmap attempts to automatically detect your active network interface; however, 
+there are some situations where it will fail or perhaps you will need to select a different interface in order to test networking issues.
+
+----
+
+To force Nmap to scan using a different network interface, use the -e argument:
+#nmap -e <interface> <target>
+#nmap -e eth2 scanme.nmap.org
+
+This is only necessary if you have problems with broadcast scripts or see the WARNING: Unable to find appropriate interface for system route to message.
+
+-----
