@@ -50,6 +50,81 @@ There are several ways of using the Nmap -p option:
 • Only ports registered in the Nmap services database: # nmap -p[1-65535] <target>
 
 
+---------
+
+
+To scan the 192.168.1.1, 192.168.1.2, and 192.168.1.3 IP addresses, the following command can be used:
+
+# nmap 192.168.1.1 192.168.1.2 192.168.1.3
+
+We can also specify octet ranges using -. For example, to scan hosts 192.168.1.1, 192.168.1.2, and 192.168.1.3, 
+we could use the expression 192.168.1.1-3, as shown in the following command:
+
+# nmap 192.168.1.1-3
+
+---------
+
+Octet range notation also supports wildcards, so we could scan from 192.168.1.0 to 192.168.1.255 with the expression 192.168.1.*:
+  $ nmap 192.168.1.*
+
+--------
+
+Excluding hosts from scans
+In addition, you may exclude hosts from the ranges by specifying the --exclude option, as shown next:
+$ nmap 192.168.1.1-255 --exclude 192.168.1.1
+$ nmap 192.168.1.1-255 --exclude 192.168.1.1,192.168.1.2
+
+
+Otherwise, you can write your exclusion list in a file using the --exclude-file option:
+
+$ cat dontscan.txt
+192.168.1.1
+192.168.1.254
+
+$ nmap --exclude-file dontscan.txt 192.168.1.1-255
+
+--------
+
+CIDR notation for targets :
+
+  $ nmap 192.168.1.0/24
+
+--------
+
+Working with target lists:
+
+nmap -iL targets.txt
+
+
+
+$cat targets.txt
+192.168.1.23
+192.168.1.12
+
+
+--------------
+
+
+Fingerprinting OSes and services running on a target:
+
+$ nmap -sV <target>
+
+--------------------
+
+To enable OS detection, add the Nmap -O option to your scan command. Note that OS detection requires Nmap to be run as a privileged user:
+
+     # nmap -O <target>
+
+--------------------
+
+
+
+
+
+
+
+
+
 
 
 
